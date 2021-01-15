@@ -1,0 +1,135 @@
+# Ler entrada
+1. ler primeira palavra (%s)
+2. identifica qual é o comando baseado nisso.
+3. switch case entre os comandos
+    -> se nao existe imprimir no log que nao existe essa funcao
+
+# Cria uma lista de paginas
+# Cria uma lista de editores
+
+----------PAGINA----------
+
+# INSEREPAGINA 
+<nome_pagina><nome_arquivo>
+1.ler string nome_pagina
+2.ler string nome_arquivo
+4. check if page exists (returns the page)
+    -> if page exists (!= NULL): error message and return
+    -> else continue
+5. initPagina:
+    -> page->name = nome_pagina
+    -> page->file = nome_arquivo
+    -> ListaColab = initListColab
+    -> ListaLinks = initListPage
+6. insertPage(list of pages, page)
+*parametros: file_entrada, file_log, list de paginas
+
+# RETIRAPAGINA 
+<nome_pagina>: 
+1. ler nome_pagina
+2. check if page exists (returns the page)
+    -> if page doesnt exist (==NULL): error message on log and return
+    -> else continue
+3. retiraPage
+*parametros: file_log, listPaginas
+
+# IMPRIMEPAGINA 
+<nome_pagina>: 
+1. ler nome_pagina
+2. check if page exists (return the page)
+    -> if page doesnt exist: erro message and return
+    -> else continue
+
+3. create file
+4. go through list of colabs
+5. print each colabs
+*parametros: file_log, page, 
+
+----------EDITOR----------
+
+# INSEREEDITOR 
+<nome_editor>: 
+1. ler nome_editor
+2. check if editor exists (return editor)
+    -> if exist (!= NULL): error message and return
+    -> else continue
+3. initEditor
+4. ed->name = name
+5. ed->listColab = initListColab
+6. insertEditor
+*parametros: file_log, listEditor
+
+----------COLABORACAO----------
+
+# INSERECONTRIBUICAO 
+<nome_pagina><nome_editor><nome_arquivo>
+1. ler nome_pagina
+2. ler nome_editor
+3. ler nome_arquivo
+
+1. check if page exists (returns page)
+2. check if editor exists (returns editor)
+3. check if file exists (open file and see if its not null)
+    -> if dont exist any of the above: error message and return
+    -> else continue
+
+4. initColab(ed, file_name)
+5. addColabEditor(ed->listColab, colab)
+6. addColabPage(page->listColab, colab)
+*parametros: file_log, listPage
+
+# RETIRACONTRIBUICAO 
+<nome_pagina><nome_editor><nome_arquivo>: 
+1. ler nome_pagina
+2. ler nome_editor
+3. ler nome_arquivo
+4. check if page exist
+5. check if colab exist (check with nome_arquivo and nome_editor)
+    ->if yes, check if its the same editor
+    -> if doesn exist: error message, return
+6. removeColab from list of colabs (page->listColabs, colab)
+*parametros: file_log, listPages
+
+----------LINK----------
+
+# INSERELINK 
+<pagina_origem><pagina_destino>: 
+insere um link (nome do arquivo) para página
+destino, na página origem.
+1. read pagina_origem
+2. read pagina_destino
+3. check if page_origem exists
+4. check if page_destino exist
+    ->if no: error message, return
+5. addPage to list of links (page_origem->listLinks, pagina_destino)
+*parametros: file_log, listPages
+
+# RETIRALINK 
+<pagina_origem><pagina_destino>: 
+1. read pagina_origem
+2. read pagina_destino
+3. check if page exist
+4. check if link exist
+    -> if no: error message, return
+    -> else continue
+5. removeLink(page_origem->listLink, pagina_destino) -> dont free other things
+*parametros: file_log, listPages
+
+----------CAMINHO----------
+
+# CAMINHO 
+<pagina_origem><pagina_destino>: 
+
+verifica se há caminho entre duas páginas (por meio
+das listas de links). Escreve no arquivo de log (HA/NAO HA CAMINHO DA <pagina_origem> PARA
+<pagina_destino>)
+
+----------WIKIED----------
+
+# IMPRIMEWIKED : 
+1. check if list exists
+2. print each page of list
+*parametros: listPage
+
+gera os arquivos e imprime todas as informações das páginas da WikED!, como
+especificado acima.
